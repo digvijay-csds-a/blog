@@ -1,0 +1,43 @@
+html, body {
+    height: 100%;
+    
+    margin: 0; 
+    padding:0;
+  }
+
+.custom-navbar{
+    background-color:#ecd3b1 !important;
+  
+}
+nav.navbar-expand-lg.bg-body-tertiary.custom-navbar{
+    border-bottom: 1px solid black;
+    
+}
+
+h1.responsive-text{
+    font-size: clamp(50px,14vw,125px);
+    font-family:  Georgia,  "Times New Roman", Times, serif;;
+     /* font-weight:150px; */
+}
+div.container-fliud.fs-3{
+    font-family: Arial, sans-serif !important;
+    font-size: clamp(1px,2vw,10px);
+    padding-top:10px;
+    margin-top:20px;
+}
+div.button.btn-success{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 22px;
+}
+footer
+{
+    border-top:1px solid black;
+    font-size:16px;
+}
+footer.pt-2.custom-footer.mt-2 {
+    font-family:"Times New Roman", sans-serif !important;
+
+}
+.navbar-nav.nav-underline.ms-auto a{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General body styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+            position: fixed;
+        }
+
+        /* Modal styles */
+        .modal-content {
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        /* Custom form styles */
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Make the invalid feedback message appear when invalid class is active */
+        .is-invalid~.invalid-feedback {
+            display: block;
+        }
+
+        /* Highlight invalid input field with red border */
+        .is-invalid {
+            border-color: #dc3545;
+        }
+
+        .modal-header .btn-close {
+            margin-top: -100px;
+            margin-right: -30px;
+        }
+
+        #errorMessage {
+            display: none;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            color: black;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        select option[hidden] {
+            color: #999;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="./logo2.png" alt="avatar" width="100" height="80" class="me-auto">
+                    <button type="button" class="btn-close" id="close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signUpForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label fw-bold">Username:</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter your username"
+                                required>
+                            <div class="invalid-feedback">
+                                Please enter a valid username. No spaces or special characters are allowed.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-bold">Email Address:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email"
+                                pattern="[a-z0-9._%+\-]+@gmail\.com" required>
+                            <div class="invalid-feedback">
+                                Please enter a valid Gmail address (xxx@gmail.com).
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label fw-bold">Password:</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password"
+                                minlength="5" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm-password" class="form-label fw-bold">Confirm Password:</label>
+                            <input type="password" class="form-control" id="confirm-password"
+                                placeholder="Confirm your password" required minlength="5">
+                        </div>
+
+
+
+                        <div id="errorMessage" class="alert alert-danger"></div>
+                        <button type="submit" class="btn btn-success w-100 fw-semibold fs-5 mt-4"
+                            style="font-family:'Courier New', Courier, monospace;border-radius:20px">Sign
+                            Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to get query parameters
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substring(1).split('&').forEach(param => {
+                const [key, value] = param.split('=');
+                params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Check if the modal should be shown based on query parameter
+        document.addEventListener('DOMContentLoaded', function () {
+            const queryParams = getQueryParams();
+            if (queryParams.showssign_up === 'true') {
+                const signUpModal = new bootstrap.Modal(document.getElementById('signUpModal'));
+                signUpModal.show(); // Open the modal automatically
+            }
+        });
+
+        // Form validation and submission handling
+        document.getElementById('signUpForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username');
+
+            const email = document.getElementById('email');
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Trim leading and trailing spaces from username
+            const usernameInput = username.value.trim();
+            username.value = usernameInput;
+
+            // Validate username
+            const invalidChars = /[^A-Za-z0-9_]/;
+            if (invalidChars.test(usernameInput)) {
+                username.classList.add('is-invalid');
+                return;
+            } else {
+                username.classList.remove('is-invalid');
+            }
+
+            // Check if email field is valid
+            const emailValue = email.value.trim();
+            const emailPattern = /^[a-z0-9._%+\-]+@gmail\.com$/i;
+            if (!emailPattern.test(emailValue)) {
+                email.classList.add('is-invalid');
+                return;
+            } else {
+                email.classList.remove('is-invalid');
+            }
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            fetch('/account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username.value, // Extract the value
+                    password: password, // Since password is already the 
+                    email: email.value, // Extract the value
+                    confirmPassword:confirmPassword
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+
+                        window.location.href = '/blogs';
+                        alert("Your Account Is Created Successfully")// Redirect on success
+                    } else {
+                        const errorMessageElement = document.getElementById('errorMessage');
+                        if (errorMessageElement) {
+                            errorMessageElement.innerText = data.message; // Show error
+                            errorMessageElement.style.display = 'block'; // Show the error message element
+                        } else {
+                            console.error('Error message element not found');
+                        }
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Handle the close button on the sign-up modal
+        const closeBtn = document.querySelector("#close");
+
+        closeBtn.addEventListener("click", function () {
+            // Update the history state to the sign-in page
+            history.replaceState(null, '', '/sign_in');
+
+            // Redirect to the sign-in page without reloading
+            window.location.href = '/sign_in';
+        });
+    </script>
+
+</body>
+
+</html>

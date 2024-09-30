@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+
+        }
+
+        .navbar {
+            padding: 1rem 2rem;
+            background-color: rgb(223, 216, 216) !important;
+        }
+
+        .navbar-brand img {
+            margin-right: 10px;
+        }
+
+        div.col-lg-3 p.text-center hover-box.fs-1 {
+            margin-top: -40px !important;
+
+        }
+
+        span.fs-1 {
+            font-family: 'Courier New', Courier, monospace;
+            color: black;
+            font-size: 40px !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info-card {
+            height: 130%;
+            width: 100%;
+            background-color: #ffffff;
+            border-color: #dee2e6;
+            position: relative;
+            z-index: 10;
+        }
+        .hover-box {
+           
+            background-color: lightblue;
+
+
+            transition: transform 0.3s ease; /* Smooth transition */
+          }
+          
+          .hover-box:hover {
+            transform: scale(1.1); /* Scale the div to 110% */
+          }
+          h3{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 29px !important;
+          }
+          .row.fixed-bottom{
+             position: relative;
+            top:140px;
+             z-index: 20;
+          }
+
+          
+    </style>
+</head>
+
+<body>
+    <!-- Admin Navbar -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="./logo2.png" width="120" height="70" alt="Logo">
+        </a>
+        <span class="fs-1">
+            Admin
+        </span>
+        <a href="/logout"><button class="btn btn-outline-danger ms-5 fw-bold"
+                        style="font-family:'Courier New', Courier, monospace">Log Out</button></a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center fs-1 fw-medium"
+                    style="font-family:'Courier New', Courier, monospace;background-color:rgb(48, 107, 112);color:white">
+                    Admin Tools
+                </p>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-6 col-lg-5">
+                <div class="info-card p-3 border rounded shadow-sm text-center hover-box user-list">
+                    <h3 class="h5">User List / Assign Role</h3>
+                </div>
+            </div>
+            <div class="col-6 offset-lg-1 col-lg-6">
+                <div class="info-card p-3 border rounded shadow-sm text-center hover-box  delete-user">
+                    <h3 class="h5">Delete User / View Role</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-6  col-lg-5">
+                <div class="info-card p-3 border rounded shadow-sm text-center hover-box add-blog">
+                    <h3 class="h5">Add Blog</h3>
+                </div>
+            </div>
+            <div class="col-6 offset-lg-1 col-lg-6">
+                <div class="info-card p-3 border rounded shadow-sm text-center hover-box delete-blog">
+                    <h3 class="h5">Delete Blog</h3>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row mb-4 mt-2">
+            <div class="col-6 col-lg-5">
+                <div class="info-card p-3 border rounded shadow-sm text-center hover-box create-role">
+                    <h3 class="h5">Create Role</h3>
+                </div>
+            </div>
+            <div class="col-6 offset-lg-1 col-lg-6">
+                <div class="info-card p-3 border rounded shadow-sm text-center hover-box delete-role">
+                    <h3 class="h5">Delete Role</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row  mt-5">
+            <div class="col-6 col-lg-5">
+                <div class="info-card p-3 border rounded shadow-sm text-center hover-box newUser ">
+                    <h3 class="h5">Create New User</h3>
+                </div>
+            </div>
+            <div class="col-6 offset-lg-1 col-lg-6">
+                <div class="info-card p-3 border rounded shadow-sm text-center hover-box editBlog">
+                    <h3 class="h5">All Blog</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="pt-2 custom-footer mt-2 fixed-bottom" id="footer"></footer>
+
+    <div class="row fixed-bottom">
+        <p class="col-12 text-center">
+            Copyright &copy; 2024 Blogify. All rights reserved.
+        </p>
+    </div>
+
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+     const userList=document.querySelector(".user-list");
+     userList.addEventListener("click",()=>{
+        window.location.href="/userList";
+     });
+     const addBlog=document.querySelector(".add-blog");
+     addBlog.addEventListener("click",()=>{
+        window.location.href="/write";
+     });
+     const deleteBlog=document.querySelector(".delete-blog");
+     deleteBlog.addEventListener("click",()=>{
+        window.location.href="/deleteBlog";
+     });
+     const deleteUser=document.querySelector(".delete-user");
+     deleteUser.addEventListener("click",()=>{
+        window.location.href="/deleteUser";
+     });
+     const createRole=document.querySelector(".create-role");
+     createRole.addEventListener("click",()=>{
+        window.location.href="/createRole";
+     });
+     const deleteRole=document.querySelector(".delete-role");
+     deleteRole.addEventListener("click",()=>{
+        window.location.href="/deleteRole";
+     });
+     const newUser=document.querySelector(".newUser");
+     newUser.addEventListener("click",()=>{
+        window.location.href="/sign_in";
+     });
+     const editBlog=document.querySelector(".editBlog");
+     editBlog.addEventListener("click",()=>{
+        window.location.href="/blogs";
+     });
+    </script>
+</body>
+
+</html>
